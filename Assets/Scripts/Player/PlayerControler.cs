@@ -302,6 +302,8 @@ public class PlayerControler : MonoBehaviour
             {
                 int randomDamage = Random.Range(_minAttackDamage, _maxAttackDamage + 1);
                 enemy.Damage(randomDamage);
+
+                PopupManager.Instance.CreateDamagePopup(hit.point, randomDamage);
             }
         }
     }

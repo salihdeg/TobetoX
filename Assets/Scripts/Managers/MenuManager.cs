@@ -8,7 +8,7 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        _highScoreText.text = PlayerPrefs.GetInt("Score").ToString();
+        _highScoreText.text = "High Score: " + PlayerPrefs.GetInt("Score").ToString();
     }
 
     public void StartGame()

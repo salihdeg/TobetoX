@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1.0f;
         _currentTime = _maxTimeSeconds;
         _endGameContainer.SetActive(false);
         ScoreManager.Instance.OnEnemyCountChanged += ScoreManager_OnEnemyCountChanged;
@@ -45,7 +46,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            float minutes = Mathf.Round(time / 60);
+            float minutes = Mathf.Floor(time / 60);
             float seconds = Mathf.Ceil(time % 60);
             string second = "";
 
@@ -68,8 +69,8 @@ public class UIManager : MonoBehaviour
 
     public void RestartGame()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = 1;
     }
 
     public void ExitGame()
@@ -87,9 +88,9 @@ public class UIManager : MonoBehaviour
         if (ScoreManager.Instance.GetKilledEnemyCount() > oldScore)
             PlayerPrefs.SetInt("Score", ScoreManager.Instance.GetKilledEnemyCount());
 
-        _highScoreText.text = PlayerPrefs.GetInt("Score").ToString();
+        _highScoreText.text = "High Score: " + PlayerPrefs.GetInt("Score").ToString();
 
         EnemySpawnerPool.Instance.DanceAllEnemies();
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
     }
 }
