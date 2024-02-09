@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
         {
             //OlmeAnim
             ScoreManager.Instance.AddEnemyCount();
+            HideHealthBar();
             _animator.SetInteger(DIE_INDEX, Random.Range(0, 2));
             _animator.SetTrigger(DIE);
             //It will destory on anim state end!
@@ -54,6 +55,16 @@ public class Enemy : MonoBehaviour
         _healthBar.fillAmount = healthPerTence / 100;
     }
 
+    public void HideHealthBar()
+    {
+        _healthBar.transform.parent.gameObject.SetActive(false);
+    }
+
+    public void ShowHealthBar()
+    {
+        _healthBar.transform.parent.gameObject.SetActive(true);
+    }
+
     public void Dance()
     {
         _animator.SetTrigger(DANCE);
@@ -63,6 +74,8 @@ public class Enemy : MonoBehaviour
     {
         _health = _maxHealth;
         transform.eulerAngles = _rotation;
+        ShowHealthBar();
         UpdateHealthBar();
     }
+
 }
